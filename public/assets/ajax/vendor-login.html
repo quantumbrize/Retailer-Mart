@@ -1,0 +1,69 @@
+<div class="login-popup">
+    <div class="tab tab-nav-boxed tab-nav-center tab-nav-underline">
+        <ul class="nav nav-tabs text-uppercase" role="tablist">
+            <li class="nav-item">
+                <a href="#sign-in" class="nav-link active">Vendor Sign In</a>
+            </li>
+            <li class="nav-item">
+                <a href="#sign-up" class="nav-link">Vendor Sign Up</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="sign-in">
+                <div class="form-group">
+                    <label>Name or Email address *</label>
+                    <input type="text" class="form-control" name="username" id="username" required>
+                </div>
+                <div class="form-group mb-0">
+                    <label>Password *</label>
+                    <input type="text" class="form-control" name="password" id="password" required>
+                </div>
+                <div class="form-checkbox d-flex align-items-center justify-content-between">
+                    <input type="checkbox" class="custom-checkbox" id="remember" name="remember" required="">
+                    <label for="remember">Remember me</label>
+                    <a href="#">Forgot your password?</a>
+                </div>
+                <a href="#" class="btn btn-primary">Sign In</a>
+            </div>
+            <div class="tab-pane" id="sign-up">
+                
+                <div class="form-group">
+                    <label>Name *</label>
+                    <input type="text" class="form-control" name="name" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Store Name *</label>
+                    <input type="text" class="form-control" name="storeName" id="storeName" required>
+                </div>
+                <div class="form-group">
+                    <label>Professional Email address *</label>
+                    <input type="text" class="form-control" name="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone number *</label>
+                    <input type="number" class="form-control" name="number" id="number" required>
+                </div>
+                <div class="form-group">
+                    <label>GST number </label>
+                    <input type="number" class="form-control" name="gstNumber" id="gstNumber" required>
+                </div>
+                <div class="form-group">
+                    <label>Document (PAN / Aadhaar) *</label>
+                    <input type="file" class="form-control" name="docFile" id="docFile" required>
+                </div>
+                <div class="form-group mb-5">
+                    <label>Password *</label>
+                    <input type="text" class="form-control" name="password_1" id="password_1" required>
+                </div>
+                <p>Your personal data will be used to support your experience 
+                    throughout this website, to manage access to your account, 
+                    and for other purposes described in our <a href="#" class="text-primary">privacy policy</a>.</p>
+                <div class="form-checkbox d-flex align-items-center justify-content-between mb-5">
+                    <input type="checkbox" class="custom-checkbox" id="agree" name="agree" required="">
+                    <label for="agree" class="font-size-md">I agree to the <a  href="#" class="text-primary font-size-md">privacy policy</a></label>
+                </div>
+                <a href="#" class="btn btn-primary">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</div>
