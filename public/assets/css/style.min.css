@@ -21511,9 +21511,9 @@ aside .sp-sidebar-banner span {
     display: block !important;
   }
 
-  .promotion-card-style{
+  /* .promotion-card-style{
     display: none !important;
-  }
+  } */
 
   .customer-support-style{
     display: none !important;
@@ -21532,7 +21532,9 @@ aside .sp-sidebar-banner span {
 }
 
 .product-wrap:hover{
-  border: none !important;
+  border: 1px solid !important;
+  border-color: green !important;
+  border-radius: 10px !important;
   }
 
 /* Subhankar Sharma Custom CSS END */

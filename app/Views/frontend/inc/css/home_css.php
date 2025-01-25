@@ -288,4 +288,64 @@
 a:hover .full-text {
     display: inline-block;
 } */
+
+ /* Scoped styles for the custom carousel */
+.custom-carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 600px; /* Adjust the height to your preference */
+  margin: auto;
+}
+
+.custom-carousel-wrapper {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.custom-carousel-item {
+  flex: 0 0 100%;
+  width: 100%;
+}
+
+.custom-carousel-item img {
+  width: 100%;
+  /* height: 100%;  */
+  object-fit: contain; /* Ensures the image scales to fit within the container without cropping */
+  display: block;
+}
+
+.custom-carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+    @media (max-width: 480px) {
+        .custom-carousel-btn {
+            top: 50% !important;
+        }
+        .custom-carousel {
+            height: 232px !important;
+        }
+    }
+
+.custom-carousel-btn.prev {
+  left: 10px;
+}
+
+.custom-carousel-btn.next {
+  right: 10px;
+}
+
+/* Scoped reset for swiper-carousel interference */
+.custom-carousel2 .swiper, .custom-carousel2 .swiper-container {
+  all: unset !important;
+}
 </style>

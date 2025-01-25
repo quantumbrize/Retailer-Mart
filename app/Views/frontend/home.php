@@ -360,36 +360,10 @@
                 </div> -->
         <!-- </div> -->
         <div class="row category-cosmetic-lifestyle appear-animate mb-5 promotion-card-style" id="promotion_card">
-            <!-- <div class="col-md-6 mb-4">
-                    <div class="banner banner-fixed category-banner-1 br-xs">
-                        <figure>
-                            <img src="<?= base_url() ?>public/assets/images/demos/demo1/categories/3-1.jpg" alt="Category Banner" width="610" height="200" style="background-color: #3B4B48;">
-                        </figure>
-                        <div class="banner-content y-50 pt-1">
-                            <h5 class="banner-subtitle font-weight-bold text-uppercase">Natural Process</h5>
-                            <h3 class="banner-title font-weight-bolder text-capitalize text-white">Cosmetic
-                                Makeup<br>Professional</h3>
-                            <a href="shop-banner-sidebar.html" class="btn btn-white btn-link btn-underline btn-icon-right">Shop Now<i class="w-icon-long-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="banner banner-fixed category-banner-2 br-xs">
-                        <figure>
-                            <img src="<?= base_url() ?>public/assets/images/demos/demo1/categories/3-2.jpg" alt="Category Banner" width="610" height="200" style="background-color: #E5E5E5;">
-                        </figure>
-                        <div class="banner-content y-50 pt-1">
-                            <h5 class="banner-subtitle font-weight-bold text-uppercase">Trending Now</h5>
-                            <h3 class="banner-title font-weight-bolder text-capitalize">Women's
-                                Lifestyle<br>Collection</h3>
-                            <a href="shop-banner-sidebar.html" class="btn btn-dark btn-link btn-underline btn-icon-right">Shop Now<i class="w-icon-long-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div> -->
+            
         </div>
-        <!-- End of Category Banner Wrapper -->
 
-        <div class="row deals-wrapper appear-animate mb-8">
+        <!-- <div class="row deals-wrapper appear-animate mb-8">
             <div class="col-lg-9 mb-4">
                 <div class="single-product h-100 br-sm">
                     <h4 class="title-sm title-underline font-weight-bolder ls-normal">
@@ -404,49 +378,11 @@
                                             <div class="product-gallery product-gallery-sticky product-gallery-vertical">
                                             <div class="custom-carousel2">
                                                 <div class="custom-carousel-wrapper2">
-                                                    <!-- <div class="custom-carousel-item2">
-                                                        <img src="https://www.axisbank.com/images/default-source/progress-with-us_new/what-is-the-best-time-to-buy-a-used-car.jpg?sfvrsn=66aa0156_2" alt="Slide 1">
-                                                    </div>
-                                                    <div class="custom-carousel-item2">
-                                                        <img src="https://www.axisbank.com/images/default-source/progress-with-us_new/what-is-the-best-time-to-buy-a-used-car.jpg?sfvrsn=66aa0156_2" alt="Slide 2">
-                                                    </div>
-                                                    <div class="custom-carousel-item2">
-                                                        <img src="https://www.axisbank.com/images/default-source/progress-with-us_new/what-is-the-best-time-to-buy-a-used-car.jpg?sfvrsn=66aa0156_2" alt="Slide 3">
-                                                    </div> -->
+                                                    
                                                 </div>
                                                 <button class="custom-carousel-btn2 prev">&#8249;</button>
                                                 <button class="custom-carousel-btn2 next">&#8250;</button>
                                             </div>
-                                                <!-- <div class="swiper-container product-single-swiper swiper-theme nav-inner">
-                                                    <div class="swiper-wrapper row cols-1 gutter-no" id="img_list">
-
-                                                    </div>
-                                                    <button class="swiper-button-next"></button>
-                                                    <button class="swiper-button-prev"></button>
-                                                    <div class="product-label-group">
-                                                        <label class="product-label label-discount">NEW</label>
-                                                    </div>
-                                                </div> -->
-                                                
-                                                <!-- <div class="product-thumbs-wrap swiper-container swiper-container-hot-deals"
-                                                    data-swiper-options="{
-                                                        'direction': 'vertical',
-                                                        'breakpoints': {
-                                                            '0': {
-                                                                'direction': 'horizontal',
-                                                                'slidesPerView': 4
-                                                            },
-                                                            '992': {
-                                                                'direction': 'vertical',
-                                                                'slidesPerView': 'auto'
-                                                            }
-                                                        }
-                                                    }">
-                                                    <div class="product-thumbs swiper-wrapper row cols-lg-1 cols-4 gutter-sm"
-                                                        id="all_img_list">
-
-                                                    </div>
-                                                </div> -->
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -454,9 +390,7 @@
                                                 <div style="display: flex;align-items: center; justify-content: space-between;">
                                                     <h2 class="product-title mb-1" id="hot_deals_product_name"></h2>
                                                     <div class="product-link-wrapper d-flex" id="wishlist-icon">
-                                                        <!-- <a href="javascript:void(0)" class="btn-product-icon btn-wishlist w-icon-heart"></a> -->
-                                                        <!-- <a href="#" class="btn-product-icon btn-compare btn-icon-left w-icon-compare"></a> -->
-                                                    </div>
+                                                        </div>
                                                 </div>
 
                                                 <hr class="product-divider">
@@ -495,56 +429,16 @@
                                                     <label class="mb-1">Size:</label>
                                                     <div class="flex-wrap d-flex align-items-center product-variations"
                                                         id="hot_deal_product_sizes">
-                                                        <!-- <a href="javascript:void(0)" class="size">Extra Large</a>
-                                                            <a href="javascript:void(0)" class="size">Large</a>
-                                                            <a href="javascript:void(0)" class="size">Medium</a>
-                                                            <a href="javascript:void(0)" class="size">Small</a> -->
+                                                        
                                                     </div>
-                                                    <!-- <a href="#" class="product-variation-clean">Clean All</a> -->
                                                 </div>
-
-                                                <!-- <div class="product-variation-price">
-                                                        <span></span>
-                                                    </div> -->
-
                                                 <div class="product-form pt-4" id="view_btn_hot_deal">
-                                                    <!-- <div class="product-qty-form mb-2 mr-2">
-                                                            <div class="input-group">
-                                                                <input class="quantity form-control" type="number" min="1" max="10000000">
-                                                                <button class="quantity-plus w-icon-plus"></button>
-                                                                <button class="quantity-minus w-icon-minus"></button>
-                                                            </div>
-                                                        </div> -->
-                                                    <!-- <button class="btn btn-primary btn-cart" onclick="window.location.href='<?= base_url('product/details?id=') ?>${products.product_id}">
-                                                            <i class="w-icon-cart"></i>
-                                                            <span>View</span>
-                                                        </button> -->
                                                 </div>
                                                 <div class="social-links-wrapper mt-1">
                                                     <div class="social-links">
-                                                        <!-- <div class="social-icons social-no-color border-thin">
-                                                                <a href="#" class="social-icon social-facebook w-icon-facebook"></a>
-                                                                <a href="#" class="social-icon social-twitter w-icon-twitter"></a>
-                                                                <a href="#" class="social-icon social-pinterest fab fa-pinterest-p"></a>
-                                                                <a href="#" class="social-icon social-whatsapp fab fa-whatsapp"></a>
-                                                                <a href="#" class="social-icon social-youtube fab fa-linkedin-in"></a>
-                                                            </div> -->
-                                                        <!-- <button class="btn btn-primary btn-cart" onclick="window.location.href='<?= base_url('product/details?id=') ?>${products.product_id}">
-                                                                <i class="w-icon-cart"></i>
-                                                                <span>View</span>
-                                                            </button> -->
                                                     </div>
 
                                                     <div class="social-links-wrapper mt-1">
-                                                        <!-- <div class="social-links">
-                                                                <div class="social-icons social-no-color border-thin">
-                                                                    <a href="#" class="social-icon social-facebook w-icon-facebook"></a>
-                                                                    <a href="#" class="social-icon social-twitter w-icon-twitter"></a>
-                                                                    <a href="#" class="social-icon social-pinterest fab fa-pinterest-p"></a>
-                                                                    <a href="#" class="social-icon social-whatsapp fab fa-whatsapp"></a>
-                                                                    <a href="#" class="social-icon social-youtube fab fa-linkedin-in"></a>
-                                                                </div>
-                                                            </div> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -580,201 +474,7 @@
                                     }
                                 }">
                                 <div class="swiper-wrapper row cols-lg-1 cols-md-3" id="best_selling">
-                                    <!-- <div class="swiper-slide product-widget-wrap">
-                                            <div class="product product-widget bb-no">
-                                                <figure class="product-media">
-                                                    <a href="product-details.html">
-                                                        <img src="<?= base_url() ?>public/assets/images/demos/demo1/products/2-1.jpg" alt="Product" width="105" height="118">
-                                                    </a>
-                                                </figure>
-                                                <div class="product-details">
-                                                    <h4 class="product-name">
-                                                        <a href="product-details.html">Kitchen Cooker</a>
-                                                    </h4>
-                                                    <div class="ratings-container">
-                                                        <div class="ratings-full">
-                                                            <span class="ratings" style="width: 60%;"></span>
-                                                            <span class="tooltiptext tooltip-top"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <ins class="new-price">$150.60</ins>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product product-widget bb-no">
-                                                <figure class="product-media">
-                                                    <a href="product-details.html">
-                                                        <img src="<?= base_url() ?>public/assets/images/demos/demo1/products/2-2.jpg" alt="Product" width="105" height="118">
-                                                    </a>
-                                                </figure>
-                                                <div class="product-details">
-                                                    <h4 class="product-name">
-                                                        <a href="product-details.html">Professional Pixel Camera</a>
-                                                    </h4>
-                                                    <div class="ratings-container">
-                                                        <div class="ratings-full">
-                                                            <span class="ratings" style="width: 60%;"></span>
-                                                            <span class="tooltiptext tooltip-top"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <ins class="new-price">$215.68</ins><del class="old-price">$230.45</del>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product product-widget">
-                                                <figure class="product-media">
-                                                    <a href="product-details.html">
-                                                        <img src="<?= base_url() ?>public/assets/images/demos/demo1/products/2-3.jpg" alt="Product" width="105" height="118">
-                                                    </a>
-                                                </figure>
-                                                <div class="product-details">
-                                                    <h4 class="product-name">
-                                                        <a href="product-details.html">Sport Women’s Wear</a>
-                                                    </h4>
-                                                    <div class="ratings-container">
-                                                        <div class="ratings-full">
-                                                            <span class="ratings" style="width: 60%;"></span>
-                                                            <span class="tooltiptext tooltip-top"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <ins class="new-price">$220.20</ins><del class="old-price">$300.62</del>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide product-widget-wrap">
-                                            <div class="product product-widget bb-no">
-                                                <figure class="product-media">
-                                                    <a href="product-details.html">
-                                                        <img src="<?= base_url() ?>public/assets/images/demos/demo1/products/2-4.jpg" alt="Product" width="105" height="118">
-                                                    </a>
-                                                </figure>
-                                                <div class="product-details">
-                                                    <h4 class="product-name">
-                                                        <a href="product-details.html">Latest Speaker</a>
-                                                    </h4>
-                                                    <div class="ratings-container">
-                                                        <div class="ratings-full">
-                                                            <span class="ratings" style="width: 60%;"></span>
-                                                            <span class="tooltiptext tooltip-top"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <ins class="new-price">$250.68</ins>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product product-widget bb-no">
-                                                <figure class="product-media">
-                                                    <a href="product-details.html">
-                                                        <img src="<?= base_url() ?>public/assets/images/demos/demo1/products/2-5.jpg" alt="Product" width="105" height="118">
-                                                    </a>
-                                                </figure>
-                                                <div class="product-details">
-                                                    <h4 class="product-name">
-                                                        <a href="product-details.html">Men's Black Wrist Watch</a>
-                                                    </h4>
-                                                    <div class="ratings-container">
-                                                        <div class="ratings-full">
-                                                            <span class="ratings" style="width: 100%;"></span>
-                                                            <span class="tooltiptext tooltip-top"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <ins class="new-price">$135.60</ins><del class="old-price">$155.70</del>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product product-widget">
-                                                <figure class="product-media">
-                                                    <a href="product-details.html">
-                                                        <img src="<?= base_url() ?>public/assets/images/demos/demo1/products/2-6.jpg" alt="Product" width="105" height="118">
-                                                    </a>
-                                                </figure>
-                                                <div class="product-details">
-                                                    <h4 class="product-name">
-                                                        <a href="product-details.html">Wash Machine</a>
-                                                    </h4>
-                                                    <div class="ratings-container">
-                                                        <div class="ratings-full">
-                                                            <span class="ratings" style="width: 100%;"></span>
-                                                            <span class="tooltiptext tooltip-top"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <ins class="new-price">$215.68</ins>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide product-widget-wrap">
-                                            <div class="product product-widget bb-no">
-                                                <figure class="product-media">
-                                                    <a href="product-details.html">
-                                                        <img src="<?= base_url() ?>public/assets/images/demos/demo1/products/2-7.jpg" alt="Product" width="105" height="118">
-                                                    </a>
-                                                </figure>
-                                                <div class="product-details">
-                                                    <h4 class="product-name">
-                                                        <a href="product-details.html">Security Guard</a>
-                                                    </h4>
-                                                    <div class="ratings-container">
-                                                        <div class="ratings-full">
-                                                            <span class="ratings" style="width: 100%;"></span>
-                                                            <span class="tooltiptext tooltip-top"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <ins class="new-price">$320.00</ins>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product product-widget bb-no">
-                                                <figure class="product-media">
-                                                    <a href="product-details.html">
-                                                        <img src="<?= base_url() ?>public/assets/images/demos/demo1/products/2-8.jpg" alt="Product" width="105" height="118">
-                                                    </a>
-                                                </figure>
-                                                <div class="product-details">
-                                                    <h4 class="product-name">
-                                                        <a href="product-details.html">Apple Super Notecom</a>
-                                                    </h4>
-                                                    <div class="ratings-container">
-                                                        <div class="ratings-full">
-                                                            <span class="ratings" style="width: 100%;"></span>
-                                                            <span class="tooltiptext tooltip-top"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <ins class="new-price">$243.30</ins><del class="old-price">$253.50</del>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product product-widget">
-                                                <figure class="product-media">
-                                                    <a href="product-details.html">
-                                                        <img src="<?= base_url() ?>public/assets/images/demos/demo1/products/2-9.jpg" alt="Product" width="105" height="118">
-                                                    </a>
-                                                </figure>
-                                                <div class="product-details">
-                                                    <h4 class="product-name">
-                                                        <a href="product-details.html">HD Television</a>
-                                                    </h4>
-                                                    <div class="ratings-container">
-                                                        <div class="ratings-full">
-                                                            <span class="ratings" style="width: 60%;"></span>
-                                                            <span class="tooltiptext tooltip-top"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <ins class="new-price">$450.68</ins><del class="old-price">$500.00</del>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
+                                    
                                 </div>
                                 <button class="swiper-button-next"></button>
                                 <button class="swiper-button-prev"></button>
@@ -784,10 +484,8 @@
                     </div>
                 </div>
             </div>
-            <!-- </div> -->
 
-        </div>
-        <!-- End of Deals Wrapper -->
+        </div> -->
     </div>
 
     <section class="category-section top-category bg-grey pt-10 pb-10 appear-animate">
@@ -885,12 +583,12 @@
         <div class="tab tab-nav-boxed tab-nav-outline appear-animate">
             <ul class="nav nav-tabs justify-content-center" role="tablist">
                 <div class="row">
-                    <div class="col-4">
+                    <!-- <div class="col-4">
                         <li class="nav-item mr-2 mb-2">
                             <a class="nav-link active br-sm font-size-md ls-normal" href="#tab1-1">New arrivals</a>
                         </li>
-                    </div>
-                    <div class="col-4">
+                    </div> -->
+                    <!-- <div class="col-4">
                         <li class="nav-item mr-2 mb-2">
                             <a class="nav-link br-sm font-size-md ls-normal" href="#tab1-2">Best seller</a>
                         </li>
@@ -899,7 +597,7 @@
                         <li class="nav-item mr-2 mb-2">
                             <a class="nav-link br-sm font-size-md ls-normal" href="#tab1-3">Most popular</a>
                         </li>
-                    </div>
+                    </div> -->
                 </div>
             </ul>
 
@@ -2158,43 +1856,11 @@
             </div>
             <!-- End of Tab Pane -->
         </div>
-        <!-- End of Tab Content -->
 
-        <div class="row category-cosmetic-lifestyle appear-animate mb-5" id="promotion_card2">
-            <!-- <div class="col-md-6 mb-4">
-                    <div class="banner banner-fixed category-banner-1 br-xs">
-                        <figure>
-                            <img src="<?= base_url() ?>public/assets/images/demos/demo1/categories/3-1.jpg" alt="Category Banner" width="610" height="200" style="background-color: #3B4B48;">
-                        </figure>
-                        <div class="banner-content y-50 pt-1">
-                            <h5 class="banner-subtitle font-weight-bold text-uppercase">Natural Process</h5>
-                            <h3 class="banner-title font-weight-bolder text-capitalize text-white">Cosmetic
-                                Makeup<br>Professional</h3>
-                            <a href="shop-banner-sidebar.html" class="btn btn-white btn-link btn-underline btn-icon-right">Shop Now<i class="w-icon-long-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="banner banner-fixed category-banner-2 br-xs">
-                        <figure>
-                            <img src="<?= base_url() ?>public/assets/images/demos/demo1/categories/3-2.jpg" alt="Category Banner" width="610" height="200" style="background-color: #E5E5E5;">
-                        </figure>
-                        <div class="banner-content y-50 pt-1">
-                            <h5 class="banner-subtitle font-weight-bold text-uppercase">Trending Now</h5>
-                            <h3 class="banner-title font-weight-bolder text-capitalize">Women's
-                                Lifestyle<br>Collection</h3>
-                            <a href="shop-banner-sidebar.html" class="btn btn-dark btn-link btn-underline btn-icon-right">Shop Now<i class="w-icon-long-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div> -->
-        </div>
-        <!-- End of Category Cosmetic Lifestyle -->
 
-        <div class="product-wrapper-1 appear-animate mb-5">
+        <!-- <div class="product-wrapper-1 appear-animate mb-5">
             <div class="title-link-wrapper pb-1 mb-4">
                 <h2 class="title ls-normal mb-0">Fashion</h2>
-                <!-- <a href="shop-boxed-banner.html" class="font-size-normal font-weight-bold ls-25 mb-0">More
-                    Products<i class="w-icon-long-arrow-right"></i></a> -->
             </div>
             <div class="row">
                 <div class="col-lg-3 col-sm-4 mb-4">
@@ -2203,29 +1869,22 @@
                         <div class="banner-content content-top">
                             <h5 class="banner-subtitle text-black font-bold mb-2">New Collection</h5>
                             <hr class="banner-divider bg-dark mb-2">
-                            <!-- <h3 class="banner-title font-weight-bolder ls-25 text-uppercase">
-                                New Arrivals<br> <span class="font-weight-normal text-capitalize">Collection</span>
-                            </h3> -->
                             <a href="<?= base_url('product/category?c_id=CATEAD0BFF320241112') ?>"
                                 class="btn btn-dark btn-outline btn-rounded btn-sm">shop
                                 Now</a>
                         </div>
                     </div>
                 </div>
-                <!-- End of Banner -->
                 <div class="col-lg-9 col-sm-8">
                     <div class=""  id="fashion_category">
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End of Product Wrapper 1 -->
 
         <div class="product-wrapper-1 appear-animate mb-8">
             <div class="title-link-wrapper pb-1 mb-4">
                 <h2 class="title ls-normal mb-0">Accessories</h2>
-                <!-- <a href="shop-boxed-banner.html" class="font-size-normal font-weight-bold ls-25 mb-0">More
-                    Products<i class="w-icon-long-arrow-right"></i></a> -->
             </div>
             <div class="row">
                 <div class="col-lg-3 col-sm-4 mb-4">
@@ -2234,24 +1893,18 @@
                         <div class="banner-content content-top">
                             <h5 class="banner-subtitle text-white font-bold mb-2">All Types Of Accessories</h5>
                             <hr class="banner-divider bg-white mb-2">
-                            <!-- <h3 class="banner-title text-white font-weight-bolder text-uppercase ls-25">
-                                Top Camera <br> <span class="font-weight-normal text-capitalize">Mirrorless</span>
-                            </h3> -->
                             <a href="<?= base_url('product/category?c_id=CAT1572090220241112') ?>"
                                 class="btn btn-white btn-outline btn-rounded btn-sm">shop
                                 now</a>
                         </div>
                     </div>
                 </div>
-                <!-- End of Banner -->
                 <div class="col-lg-9 col-sm-8">
                     <div class="swiper-container swiper-theme" id="accessories_category">
                     </div>
-                    <!-- End of Produts -->
                 </div>
             </div>
-        </div>
-        <!-- End of Product Wrapper 1 -->
+        </div> -->
 
         
 
@@ -2313,11 +1966,9 @@
         <!-- End of Banner Fashion -->
 
         
-        <div class="product-wrapper-1 appear-animate mb-5">
+        <!-- <div class="product-wrapper-1 appear-animate mb-5">
             <div class="title-link-wrapper pb-1 mb-4">
                 <h2 class="title ls-normal mb-0">Disposable Item</h2>
-                <!-- <a href="shop-boxed-banner.html" class="font-size-normal font-weight-bold ls-25 mb-0">More
-                    Products<i class="w-icon-long-arrow-right"></i></a> -->
             </div>
             <div class="row">
                 <div class="col-lg-3 col-sm-4 mb-4">
@@ -2325,30 +1976,23 @@
                         background-color: #252525;">
                         <div class="banner-content content-top">
                             <h5 class="banner-subtitle text-black font-bold mb-2">Buy any kind of disposable items</h5>
-                            <!-- <hr class="banner-divider bg-white mb-2">
-                            <h3 class="banner-title text-white font-weight-bolder text-uppercase ls-25">
-                                Top Camera <br> <span class="font-weight-normal text-capitalize">Mirrorless</span>
-                            </h3> -->
                             <a href="<?= base_url('product/category?c_id=CATE110C36B20250113') ?>"
                                 class="btn btn-black btn-outline btn-rounded btn-sm">shop
                                 now</a>
                         </div>
                     </div>
                 </div>
-                <!-- End of Banner -->
                 <div class="col-lg-9 col-sm-8">
                     <div class=""  id="home_garden_category">
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- End of Product Wrapper 1 -->
 
-        <div class="product-wrapper-1 appear-animate mb-5">
+        <!-- <div class="product-wrapper-1 appear-animate mb-5">
             <div class="title-link-wrapper pb-1 mb-4">
                 <h2 class="title ls-normal mb-0">Chemical</h2>
-                <!-- <a href="shop-boxed-banner.html" class="font-size-normal font-weight-bold ls-25 mb-0">More
-                    Products<i class="w-icon-long-arrow-right"></i></a> -->
             </div>
             <div class="row">
                 <div class="col-lg-3 col-sm-4 mb-4">
@@ -2357,16 +2001,12 @@
                         <div class="banner-content content-top">
                             <h5 class="banner-subtitle text-black font-bold mb-2">All type home chemical products</h5>
                             <hr class="banner-divider bg-dark mb-2">
-                            <!-- <h3 class="banner-title font-weight-bolder ls-25 text-uppercase">
-                                New Arrivals<br> <span class="font-weight-normal text-capitalize">Collection</span>
-                            </h3> -->
                             <a href="<?= base_url('product/category?c_id=CATEA43B66E20250116') ?>"
                                 class="btn btn-dark btn-outline btn-rounded btn-sm">shop
                                 Now</a>
                         </div>
                     </div>
                 </div>
-                <!-- End of Banner -->
                 <div class="col-lg-9 col-sm-8">
                     <div class="swiper-container swiper-theme" data-swiper-options="{
                             'spaceBetween': 20,
@@ -2384,7 +2024,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- End of Product Wrapper 1 -->
 
         

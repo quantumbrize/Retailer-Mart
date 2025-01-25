@@ -356,92 +356,203 @@
         });
     }
 
-    let swiperBanner
+    // let swiperBanner
+    // function load_banners() {
+    //     $.ajax({
+    //         url: "<?= base_url('/api/banners') ?>",
+    //         type: "GET",
+    //         beforeSend: function () {
+    //         },
+    //         success: function (resp) {
+    //             if (resp.status) {
+    //                 $.each(resp.data, function (index, banner) {
+    //                     let fontColor = '';
+    //                     isImageLight(`<?= base_url('public/uploads/banner_images/') ?>${banner.img}`)
+    //                         .then(isLight => {
+    //                             if (isLight) {
+    //                                 // console.log('Image is light');
+    //                                 fontColor = 'black';
+    //                             } else {
+    //                                 // console.log('Image is dark');
+    //                                 fontColor = 'light';
+    //                             }
+    //                             // console.log(fontColor);
+
+    //                             isActive = index === 0 ? 'active' : ''
+    //                             // console.log(isActive);
+    //                             var shop_now = ``
+    //                             if (banner.title != "") {
+    //                                 shop_now = banner.link
+    //                             }
+    //                             // html = ` <div class="carousel-item ${isActive}">
+    //                             //             <a href="${banner.link}" >
+    //                             //                 <div class="image-container">
+    //                             //                     <img src="<?= base_url('public/uploads/banner_images/') ?>${banner.img}" class="d-block w-100 carousel_img">
+    //                             //                 </div>
+    //                             //                 <div class="carousel-caption">
+    //                             //                     <div class="row justify-content-end">
+    //                             //                         <div class="col-lg-12">
+    //                             //                             <div class="text-sm-end">
+    //                             //                                 <h6 class="fs-24 display-4 fw-bold lh-base text-capitalize mb-3 text-${fontColor}">
+    //                             //                                     ${banner.title}
+    //                             //                                 </h6>
+    //                             //                                 <div class="fs-20 mb-4 text-${fontColor}">
+    //                             //                                     ${banner.description}
+    //                             //                                 </div>
+    //                             //                                 ${shop_now}
+    //                             //                             </div>
+    //                             //                         </div>
+    //                             //                     </div>
+    //                             //                 </div>
+    //                             //             </a>
+    //                             //         </div>`
+    //                             html = `<a  href="${shop_now}" class="hero-ban swiper-slide banner banner-fixed intro-slide intro-slide1" style="background-image: url(<?= base_url('public/uploads/banner_images/') ?>${banner.img}); background-color: #ebeef2; background-size: cover; background-position: center;"></a>`
+
+
+    //                             $('#banner_img').append(html);
+    //                         })
+
+    //                         .catch(error => {
+    //                             console.error(error);
+    //                         });
+    //                 })
+    //                 if (swiperBanner) {
+    //                     swiperBanner.update();
+    //                 } else {
+    //                     var swiperOptions = {
+    //                         slidesPerView: 1,
+    //                         autoplay: {
+    //                             delay: 3000,
+    //                             disableOnInteraction: true
+    //                         }
+    //                     };
+
+    //                     swiperBanner = new Swiper('.swiper-container.swiper-theme.nav-inner.pg-inner.swiper-nav-lg.animation-slider.pg-xxl-hide.nav-xxl-show.nav-hide', swiperOptions);
+    //                 }
+
+    //             } else {
+    //             }
+
+    //         },
+    //         error: function (err) {
+    //             console.log(err)
+    //         },
+    //         complete: function () {
+
+    //         }
+    //     })
+    // }
+
     function load_banners() {
         $.ajax({
-            url: "<?= base_url('/api/banners') ?>",
-            type: "GET",
-            beforeSend: function () {
-            },
-            success: function (resp) {
-                if (resp.status) {
-                    $.each(resp.data, function (index, banner) {
-                        let fontColor = '';
-                        isImageLight(`<?= base_url('public/uploads/banner_images/') ?>${banner.img}`)
-                            .then(isLight => {
-                                if (isLight) {
-                                    // console.log('Image is light');
-                                    fontColor = 'black';
-                                } else {
-                                    // console.log('Image is dark');
-                                    fontColor = 'light';
-                                }
-                                // console.log(fontColor);
+        url: "<?= base_url('/api/banners') ?>",
+        type: "GET",
+        beforeSend: function () {
+            // Optional: Add a loading spinner if needed
+        },
+        success: function (resp) {
+            if (resp.status) {
+            const wrapper = $('.custom-carousel-wrapper');
+            wrapper.empty(); // Clear any existing items
+            
+            // Append each banner dynamically
+            $.each(resp.data, function (index, banner) {
+                const slide = `
+                <div class="custom-carousel-item">
+                    <img src="<?= base_url('public/uploads/banner_images/') ?>${banner.img}" alt="Slide ${index + 1}">
+                </div>`;
+                wrapper.append(slide);
+            });
 
-                                isActive = index === 0 ? 'active' : ''
-                                // console.log(isActive);
-                                var shop_now = ``
-                                if (banner.title != "") {
-                                    shop_now = banner.link
-                                }
-                                // html = ` <div class="carousel-item ${isActive}">
-                                //             <a href="${banner.link}" >
-                                //                 <div class="image-container">
-                                //                     <img src="<?= base_url('public/uploads/banner_images/') ?>${banner.img}" class="d-block w-100 carousel_img">
-                                //                 </div>
-                                //                 <div class="carousel-caption">
-                                //                     <div class="row justify-content-end">
-                                //                         <div class="col-lg-12">
-                                //                             <div class="text-sm-end">
-                                //                                 <h6 class="fs-24 display-4 fw-bold lh-base text-capitalize mb-3 text-${fontColor}">
-                                //                                     ${banner.title}
-                                //                                 </h6>
-                                //                                 <div class="fs-20 mb-4 text-${fontColor}">
-                                //                                     ${banner.description}
-                                //                                 </div>
-                                //                                 ${shop_now}
-                                //                             </div>
-                                //                         </div>
-                                //                     </div>
-                                //                 </div>
-                                //             </a>
-                                //         </div>`
-                                html = `<a  href="${shop_now}" class="hero-ban swiper-slide banner banner-fixed intro-slide intro-slide1" style="background-image: url(<?= base_url('public/uploads/banner_images/') ?>${banner.img}); background-color: #ebeef2; background-size: cover; background-position: center;"></a>`
-
-
-                                $('#banner_img').append(html);
-                            })
-
-                            .catch(error => {
-                                console.error(error);
-                            });
-                    })
-                    if (swiperBanner) {
-                        swiperBanner.update();
-                    } else {
-                        var swiperOptions = {
-                            slidesPerView: 1,
-                            autoplay: {
-                                delay: 3000,
-                                disableOnInteraction: true
-                            }
-                        };
-
-                        swiperBanner = new Swiper('.swiper-container.swiper-theme.nav-inner.pg-inner.swiper-nav-lg.animation-slider.pg-xxl-hide.nav-xxl-show.nav-hide', swiperOptions);
-                    }
-
-                } else {
-                }
-
-            },
-            error: function (err) {
-                console.log(err)
-            },
-            complete: function () {
-
+            // Reinitialize the carousel after loading
+            initializeCarousel();
+            } else {
+            console.log("No banners found.");
             }
-        })
+        },
+        error: function (err) {
+            console.error(err);
+        },
+        complete: function () {
+            // Optional: Hide loading spinner if added
+        }
+        });
     }
+
+    function initializeCarousel() {
+    const carousel = document.querySelector('.custom-carousel');
+    const wrapper = carousel.querySelector('.custom-carousel-wrapper');
+    const items = carousel.querySelectorAll('.custom-carousel-item');
+    const prevBtn = carousel.querySelector('.custom-carousel-btn.prev');
+    const nextBtn = carousel.querySelector('.custom-carousel-btn.next');
+
+    let currentIndex = 0;
+    let autoScrollInterval;
+
+    function updateCarousel() {
+      const offset = -currentIndex * 100;
+      wrapper.style.transition = 'transform 0.5s ease-in-out';
+      wrapper.style.transform = `translateX(${offset}%)`;
+    }
+
+    function jumpToStart() {
+      wrapper.style.transition = 'none';
+      wrapper.style.transform = 'translateX(0)';
+      currentIndex = 0;
+    }
+
+    function jumpToEnd() {
+      wrapper.style.transition = 'none';
+      wrapper.style.transform = `translateX(${-100 * (items.length - 1)}%)`;
+      currentIndex = items.length - 1;
+    }
+
+    function startAutoScroll() {
+      stopAutoScroll(); // Clear any existing intervals
+      autoScrollInterval = setInterval(() => {
+        if (currentIndex < items.length - 1) {
+          currentIndex += 1;
+          updateCarousel();
+        } else {
+          jumpToStart();
+        }
+      }, 3000); // Auto-scroll every 3 seconds
+    }
+
+    function stopAutoScroll() {
+      clearInterval(autoScrollInterval);
+    }
+
+    prevBtn.addEventListener('click', () => {
+      stopAutoScroll();
+      if (currentIndex > 0) {
+        currentIndex -= 1;
+      } else {
+        jumpToEnd();
+      }
+      updateCarousel();
+      startAutoScroll();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      stopAutoScroll();
+      if (currentIndex < items.length - 1) {
+        currentIndex += 1;
+        updateCarousel();
+      } else {
+        jumpToStart();
+        updateCarousel();
+      }
+      startAutoScroll();
+    });
+
+    // Start auto-scroll on load
+    startAutoScroll();
+
+    // Pause auto-scroll on hover
+    carousel.addEventListener('mouseenter', stopAutoScroll);
+    carousel.addEventListener('mouseleave', startAutoScroll);
+  }
 
     function latest_arival() {
         $.ajax({
@@ -475,6 +586,7 @@
                                                 <img src="${product_img}" alt="Product" width="300" height="338">
                                             </a>
                                             <div class="product-action-vertical product-action-popular">
+                                                <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
                                                 <a href="javascript:void(0)" class="btn-product-icon btn-wishlist w-icon-heart${product.is_wishlisted ? '-full' : ''}" data-product-id="${product.product_id}" title="Add to wishlist" onclick="wishlist('${product.product_id}')"></a>
                                             </div>
                                             <div class="product-label-group product-label-popular">
@@ -543,51 +655,69 @@
                     //             </div>
                     //         </a>
                     //     </div>`
-                    let colSize = 6
+                    let colSize = 3
                     let screenWidth = window.innerWidth;
                     if (screenWidth < 768) {
-                        colSize = 12
+                        colSize = 6
                     }
                     html = `<div class="col-md-${colSize} mb-4">
-                                    <div class="banner banner-fixed category-banner-1 br-xs">
-                                          
-                                        <figure>
-                                            <a href="${resp.data.link1}" target="_blank"> 
-                                                <img src="<?= base_url('public/uploads/promotion_card_images/') ?>${resp.data.img1}" alt="Category Banner" width="610" height="200" style="background-color: #3B4B48;">
-                                            </a>
-                                        </figure>
-                                       
-                                    </div>
+                                <div class="banner banner-fixed category-banner-1 br-xs">
+                                        
+                                    <figure>
+                                        <a href="${resp.data.link1}" target="_blank"> 
+                                            <img src="<?= base_url('public/uploads/promotion_card_images/') ?>${resp.data.img1}" alt="Category Banner" width="610" height="200" style="background-color: #3B4B48;">
+                                        </a>
+                                    </figure>
+                                    
                                 </div>
-                                <div class="col-md-${colSize} mb-4">
-                                    <div class="banner banner-fixed category-banner-2 br-xs">
-                                        <figure>
-                                            <a href="${resp.data.link2}" target="_blank">
-                                                <img src="<?= base_url('public/uploads/promotion_card_images/') ?>${resp.data.img2}" alt="Category Banner" width="610" height="200" style="background-color: #E5E5E5;">
-                                            </a>
-                                        </figure>
-                                    </div>
-                                </div>`
-                    html2 = `<div class="col-md-6 mb-4">
-                                    <div class="banner banner-fixed category-banner-1 br-xs">
-                                        <figure>
-                                            <a href="${resp.data.link3}" target="_blank">
-                                                <img src="<?= base_url('public/uploads/promotion_card_images/') ?>${resp.data.img3}" alt="Category Banner" width="610" height="200" style="background-color: #3B4B48;">
-                                            </a>
-                                        </figure>
-                                    </div>
+                            </div>
+                            <div class="col-md-${colSize} mb-4">
+                                <div class="banner banner-fixed category-banner-2 br-xs">
+                                    <figure>
+                                        <a href="${resp.data.link2}" target="_blank">
+                                            <img src="<?= base_url('public/uploads/promotion_card_images/') ?>${resp.data.img2}" alt="Category Banner" width="610" height="200" style="background-color: #E5E5E5;">
+                                        </a>
+                                    </figure>
                                 </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="banner banner-fixed category-banner-2 br-xs">
-                                        <figure>
-                                            <a href="${resp.data.link4}" target="_blank">
-                                                <img src="<?= base_url('public/uploads/promotion_card_images/') ?>${resp.data.img4}" alt="Category Banner" width="610" height="200" style="background-color: #E5E5E5;">
-                                            </a>
-                                        </figure>
-                                    </div>
-                                </div>`
+                            </div>
+                            <div class="col-md-${colSize} mb-4">
+                                <div class="banner banner-fixed category-banner-2 br-xs">
+                                    <figure>
+                                        <a href="${resp.data.link3}" target="_blank">
+                                            <img src="<?= base_url('public/uploads/promotion_card_images/') ?>${resp.data.img3}" alt="Category Banner" width="610" height="200" style="background-color: #E5E5E5;">
+                                        </a>
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="col-md-${colSize} mb-4">
+                                <div class="banner banner-fixed category-banner-2 br-xs">
+                                    <figure>
+                                        <a href="${resp.data.link4}" target="_blank">
+                                            <img src="<?= base_url('public/uploads/promotion_card_images/') ?>${resp.data.img4}" alt="Category Banner" width="610" height="200" style="background-color: #E5E5E5;">
+                                        </a>
+                                    </figure>
+                                </div>
+                            </div>`
+                    // html2 = `<div class="col-md-6 mb-4">
+                    //                 <div class="banner banner-fixed category-banner-1 br-xs">
+                    //                     <figure>
+                    //                         <a href="${resp.data.link3}" target="_blank">
+                    //                             <img src="<?= base_url('public/uploads/promotion_card_images/') ?>${resp.data.img3}" alt="Category Banner" width="610" height="200" style="background-color: #3B4B48;">
+                    //                         </a>
+                    //                     </figure>
+                    //                 </div>
+                    //             </div>
+                    //             <div class="col-md-6 mb-4">
+                    //                 <div class="banner banner-fixed category-banner-2 br-xs">
+                    //                     <figure>
+                    //                         <a href="${resp.data.link4}" target="_blank">
+                    //                             <img src="<?= base_url('public/uploads/promotion_card_images/') ?>${resp.data.img4}" alt="Category Banner" width="610" height="200" style="background-color: #E5E5E5;">
+                    //                         </a>
+                    //                     </figure>
+                    //                 </div>
+                    //             </div>`
                     $('#promotion_card').append(html);
-                    $('#promotion_card2').append(html2);
+                    // $('#promotion_card2').append(html2);
 
                 } else {
                     console.log(resp)
