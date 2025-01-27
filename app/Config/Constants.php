@@ -147,7 +147,7 @@ defined('DB_TEST_hostname') || define('DB_TEST_hostname', 'localhost');
 defined('DB_TEST_username') || define('DB_TEST_username', 'root');
 defined('DB_TEST_password') || define('DB_TEST_password', '');
 // defined('DB_TEST_database') || define('DB_TEST_database', 'new_candyflow');
-defined('DB_TEST_database') || define('DB_TEST_database', 'candyflow_server');
+defined('DB_TEST_database') || define('DB_TEST_database', 'retailer_mart');
 defined('DB_TEST_DBDriver') || define('DB_TEST_DBDriver', 'MySQLi');
 
 

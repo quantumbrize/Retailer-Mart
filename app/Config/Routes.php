@@ -142,6 +142,7 @@ $routes->post('/api/category/delete',               'Api\Category_Controller::PO
 $routes->get('/api/category/by/id',                 'Api\Category_Controller::GET_a_category'); // Get a single category by id
 $routes->get('/api/product',                        'Api\Product_Controller::GET_product'); // Get product
 $routes->get('/api/letest-arrival/product',         'Api\Product_Controller::GET_letest_arrival_products'); // Get letest arrival product
+$routes->post('/api/upload/product/excel',          'Api\Product_Controller::POST_add_product_excel'); // POST Upload Excel File
 
 $routes->get('/api/search/product',                 'Api\Product_Controller::GET_search_products'); // Search product
 $routes->post('/api/product/add',                   'Api\Product_Controller::POST_add_product'); // Add product

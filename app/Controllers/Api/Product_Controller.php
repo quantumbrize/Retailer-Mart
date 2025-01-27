@@ -2,6 +2,8 @@
 
 namespace App\Controllers\Api;
 
+use PhpOffice\PhpSpreadsheet\IOFactory;
+
 use App\Models\ProductModel;
 use App\Models\ProductItemModel;
 use App\Models\ProductConfigModel;
@@ -24,6 +26,7 @@ use App\Models\WishlistsModel;
 use App\Models\BestSellingVendorModel;
 use App\Models\VendorAuthorizationModel;
 use App\Models\UserCartModel;
+
 
 
 class Product_Controller extends Api_Controller
@@ -290,6 +293,95 @@ class Product_Controller extends Api_Controller
             $resp['message'] = 'Product added';
             $resp['data'] = [];
         }
+        return $resp;
+    }
+
+    public function add_product_excel($data)
+    {
+        $resp = [
+            'status' => false,
+            'message' => 'Product not added',
+            'data' => null
+        ];
+        $uploadedFile = $this->request->getFiles();
+
+        if (!$uploadedFile['excel_file']->isValid()) {
+            return $this->response->setStatusCode(400)->setJSON(['error' => $uploadedFile['excel_file']->getErrorString()]);
+        }
+
+        $filePath = 'public/uploads/product_excel/';
+        $fileName = $uploadedFile['excel_file']->getRandomName();
+        // $this->pr($filePath);
+        // $this->prd($fileName);
+        if (!$uploadedFile['excel_file']->move($filePath, $fileName)) {
+            return $this->response->setStatusCode(400)->setJSON(['error' => 'Failed to move the uploaded file.']);
+        }
+
+        // Load the spreadsheet
+        $spreadsheet = IOFactory::load($filePath.$fileName);
+        // $this->prd($rows);
+        $sheet = $spreadsheet->getActiveSheet();
+        $rows = $sheet->toArray();
+        $this->prd($rows);
+        $ProductModel = new ProductModel();
+        $ProductItemModel = new ProductItemModel();
+        $ProductMetaDetalisModel = new ProductMetaDetalisModel();
+
+        foreach ($rows as $index => $row) {
+            if ($index === 0) {
+                // Skip the header row
+                continue;
+            }
+
+            // Customize columns based on your table structure
+            $product_data = [
+                'uid' => $this->generate_uid(UID_PRODUCT),
+                'vendor_id' => $row[0],
+                'category_id' => $row[1],
+                'name' => $row[2],
+                'description' => $row[3],
+                'size_id' => $row[4],
+            ];
+
+            $product_item_data = [
+                'uid' => $this->generate_uid(UID_PRODUCT_ITEM),
+                'product_id' => $product_data['uid'],
+                'price' => $row[5],
+                'discount' => $row[6],
+                'product_tags' => $row[7],
+                'publish_date' => $row[8],
+                'status' => $row[9],
+                'visibility' => $row[10],
+                'manufacturer_brand' => $row[11],
+                'manufacturer_name' => $row[12]
+            ];
+
+            $product_meta_data = [
+                'uid' => $this->generate_uid(UID_PRODUCT_META),
+                'product_id' => $product_data['uid'],
+                'meta_title' => $row[13],
+                'meta_description' => $row[14],
+                'meta_keywords' => $row[15],
+            ];
+
+            // Transaction Start
+            $ProductModel->transStart();
+            try {
+                $ProductModel->insert($product_data);
+                $ProductItemModel->insert($product_item_data);
+                $ProductMetaDetalisModel->insert($product_meta_data);
+                // Commit the transaction if all queries are successful
+                $ProductModel->transCommit();
+            } catch (\Exception $e) {
+                // Rollback the transaction if an error occurs
+                $ProductModel->transRollback();
+                $resp['message'] = $e->getMessage();
+                return $resp;
+            }
+        }
+
+        $resp['status'] = true;
+        $resp['message'] = 'Products added successfully';
         return $resp;
     }
 
@@ -2802,6 +2894,13 @@ class Product_Controller extends Api_Controller
     {
         $data = $this->request->getPost();
         $resp = $this->product_bulk_update($data);
+        return $this->response->setJSON($resp);
+    }
+
+    public function POST_add_product_excel()
+    {
+        $data = $this->request->getPost();
+        $resp = $this->add_product_excel($data);
         return $this->response->setJSON($resp);
     }
 

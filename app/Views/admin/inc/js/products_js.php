@@ -255,6 +255,63 @@
             })
     }
 
+    function upload_excel_file(){
+        var formData = new FormData();
+
+            
+
+            const fileInput = $('#excel_file')[0].files[0];
+
+            formData.append('excel_file',fileInput);
+            
+            $.ajax({
+                url: "<?= base_url('/api/upload/product/excel') ?>",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    // $('#product_add_btn').html(`<div class="spinner-border" role="status"></div>`)
+                    // $('#product_add_btn').attr('disabled', true)
+
+                },
+                success: function (resp) {
+                    let html = ''
+
+                    if (resp.status) {
+                        html += `<div class="alert alert-success alert-dismissible alert-label-icon label-arrow fade show material-shadow" role="alert">
+                                <i class="ri-checkbox-circle-fill label-icon"></i>${resp.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>`
+                       
+                        $('#product-discount-input').val(``)
+                        // $imageContainer.html(``);
+                        // $numOfFiles.html(``);
+                        clearImages($("#images"), $("#num-of-files"));
+                        clearImages($("#images2"), $("#num-of-files2"));
+                        get_size_list()
+                        
+                    } else {
+                        html += `<div class="alert alert-warning alert-dismissible alert-label-icon label-arrow fade show material-shadow" role="alert">
+                                <i class="ri-alert-line label-icon"></i><strong>Warning</strong> - ${resp.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>`
+                    }
+
+
+                    $('#alert').html(html)
+                    console.log(resp)
+                },
+                error: function (err) {
+                    console.log(err)
+                },
+                complete: function () {
+                    // $('#product_add_btn').html(`submit`)
+                    // $('#product_add_btn').attr('disabled', false)
+                }
+            })
+    }
+
 
 
 </script>
