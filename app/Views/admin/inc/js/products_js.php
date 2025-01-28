@@ -1,3 +1,4 @@
+
 <script>
     load_products();
     function calculateFinalPrice(originalPrice, discountPercentage) {
@@ -159,9 +160,8 @@
                                                 ${formatDate(product.created_at)}
                                             </td>
                                             <td>
-                                                Base Price : ₹${product.product_prices != "" ? product.product_prices[0].price : ''} - ₹${product.product_prices != "" ? product.product_prices[product.product_prices.length-1].price : ''} <br>
-                                                Discount : ${product.base_discount} %<br>
-                                                Tax : <b class="fs-16 text-success">${product.tax}%</b>
+                                                MRP : ₹${product.mrp != "" ? product.mrp : ''} <br>
+                                                Rate : ₹${product.base_price}<br>
                                             </td>
                                             <td>
                                                 <sapn class="badge bg-success-subtle text-success text-uppercase">${product.visibility}</sapn>
@@ -255,14 +255,15 @@
             })
     }
 
-    function upload_excel_file(){
-        var formData = new FormData();
 
-            
+    function upload_excel_file(){
+        let user_id = '<?= !empty($_SESSION[SES_ADMIN_USER_ID]) ? $_SESSION[SES_ADMIN_USER_ID] : '' ?>'
+        var formData = new FormData();
 
             const fileInput = $('#excel_file')[0].files[0];
 
             formData.append('excel_file',fileInput);
+            formData.append('user_id',user_id);
             
             $.ajax({
                 url: "<?= base_url('/api/upload/product/excel') ?>",
@@ -283,13 +284,13 @@
                                 <i class="ri-checkbox-circle-fill label-icon"></i>${resp.message}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>`
-                       
-                        $('#product-discount-input').val(``)
+                            load_products()
+                        // $('#product-discount-input').val(``)
                         // $imageContainer.html(``);
                         // $numOfFiles.html(``);
-                        clearImages($("#images"), $("#num-of-files"));
-                        clearImages($("#images2"), $("#num-of-files2"));
-                        get_size_list()
+                        // clearImages($("#images"), $("#num-of-files"));
+                        // clearImages($("#images2"), $("#num-of-files2"));
+                        // get_size_list()
                         
                     } else {
                         html += `<div class="alert alert-warning alert-dismissible alert-label-icon label-arrow fade show material-shadow" role="alert">

@@ -303,6 +303,10 @@ class Product_Controller extends Api_Controller
             'message' => 'Product not added',
             'data' => null
         ];
+
+        $VendorModel = new VendorModel();
+        $vendorRow = $VendorModel->where('user_id', $data['user_id'])->first();
+        $vendor_id = !empty($vendorRow['uid']) ? $vendorRow['uid'] : '';
         $uploadedFile = $this->request->getFiles();
 
         if (!$uploadedFile['excel_file']->isValid()) {
@@ -322,7 +326,7 @@ class Product_Controller extends Api_Controller
         // $this->prd($rows);
         $sheet = $spreadsheet->getActiveSheet();
         $rows = $sheet->toArray();
-        $this->prd($rows);
+        // $this->prd($rows[4][10]);
         $ProductModel = new ProductModel();
         $ProductItemModel = new ProductItemModel();
         $ProductMetaDetalisModel = new ProductMetaDetalisModel();
@@ -336,39 +340,52 @@ class Product_Controller extends Api_Controller
             // Customize columns based on your table structure
             $product_data = [
                 'uid' => $this->generate_uid(UID_PRODUCT),
-                'vendor_id' => $row[0],
-                'category_id' => $row[1],
-                'name' => $row[2],
-                'description' => $row[3],
-                'size_id' => $row[4],
+                'vendor_id' => $vendor_id,
+                'category_id' => "",
+                'name' => $row[1],
+                'description' => $row[7],
+                'size_id' => "",
+                'status' => "active",
             ];
 
             $product_item_data = [
                 'uid' => $this->generate_uid(UID_PRODUCT_ITEM),
                 'product_id' => $product_data['uid'],
                 'price' => $row[5],
-                'discount' => $row[6],
-                'product_tags' => $row[7],
-                'publish_date' => $row[8],
-                'status' => $row[9],
-                'visibility' => $row[10],
-                'manufacturer_brand' => $row[11],
-                'manufacturer_name' => $row[12]
+                'mrp' => $row[4],
+                'discount' => 0,
+                // 'product_tags' => "",
+                'publish_date' => date('Y-m-d H:i:s'),
+                'generic_name' => $row[2],
+                'company_name' => $row[3],
+                'exp_date' => $row[6],
+                'container_type' => $row[9],
+                'flavour' => $row[10] ? $row[10] : "",
+                'purchase_quantity' => $row[11] ? $row[11] : 0,
+                'free_quantity' => $row[12] ? $row[12] : 0,
+                'quantity' => $row[8],
+                'status' => 'active',
+                'visibility' => 'visible',
+                'manufacturer_brand' => "",
+                'manufacturer_name' => ""
             ];
 
             $product_meta_data = [
                 'uid' => $this->generate_uid(UID_PRODUCT_META),
                 'product_id' => $product_data['uid'],
-                'meta_title' => $row[13],
-                'meta_description' => $row[14],
-                'meta_keywords' => $row[15],
+                'meta_title' => "",
+                'meta_description' => "",
+                'meta_keywords' => "",
             ];
-
+            // $insertData = $ProductItemModel->insert($product_item_data);
+            // $this->pr($product_item_data);
+            // $this->prd($insertData);
             // Transaction Start
             $ProductModel->transStart();
             try {
                 $ProductModel->insert($product_data);
-                $ProductItemModel->insert($product_item_data);
+                $insertData = $ProductItemModel->insert($product_item_data);
+                // $this->prd($insertData);
                 $ProductMetaDetalisModel->insert($product_meta_data);
                 // Commit the transaction if all queries are successful
                 $ProductModel->transCommit();
@@ -728,14 +745,15 @@ class Product_Controller extends Api_Controller
                 categories.uid AS category_id,
                 product_item.uid AS product_item_id,
                 product_item.price AS base_price,
+                product_item.mrp,
                 product_item.sku AS product_stock,
                 product_item.discount AS base_discount,
-                product_item.product_tags AS tags,
+                -- product_item.product_tags AS tags,
                 product_item.publish_date AS publish_date,
                 product_item.status AS status,
                 product_item.visibility AS visibility,
                 product_item.quantity,
-                product_item.size_chart,
+                -- product_item.size_chart,
                 product_item.tax,
                 product_item.delivery_charge,
                 product_item.manufacturer_brand AS manufacturer_brand,
