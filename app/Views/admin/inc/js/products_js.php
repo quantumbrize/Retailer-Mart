@@ -1,6 +1,7 @@
 
 <script>
     load_products();
+    get_categories_all()
     function calculateFinalPrice(originalPrice, discountPercentage) {
         // Calculate the discount amount
         var discountAmount = (originalPrice * discountPercentage) / 100;
@@ -84,6 +85,92 @@
 
     }
 
+   
+    function get_categories_all() {
+        $.ajax({
+            url: "<?= base_url('/api/categories') ?>",
+            type: "GET",
+            beforeSend: function () { },
+            success: function (resp) {
+                console.log('category', resp)
+                let html = '<option disabled selected value="">Select-category</option>'
+                if (resp.status) {
+                    $.each(resp.data, function (key, val) {
+                        html += `<option value="${val.uid}">${val.name}</option>`
+                    })
+                }
+                $('.product-category-list').html(html)
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    }
+
+    function get_sub_category() {
+        let cat_id = $('#product-category').val()
+        $('#selected-cat-name').val(cat_id)
+        $.ajax({
+            url: "<?= base_url('/api/category/by/id') ?>",
+            type: "GET",
+            data: { c_id: cat_id },
+            beforeSend: function () { },
+            success: function (resp) {
+                if (resp.status) {
+                    // console.log(resp)
+                    $('#selected-category').text(resp.data.name)
+                } else {
+                    // console.log(resp);
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+        $.ajax({
+            url: "<?= base_url('/api/categories') ?>",
+            type: "GET",
+            data: { parent_id: cat_id },
+            beforeSend: function () { },
+            success: function (resp) {
+                if (resp.status) {
+                    let html = '<option disabled selected value="">Select Sub-category</option>'
+                    $.each(resp.data, function (key, val) {
+                        html += `<option value="${val.uid}">${val.name}</option>`
+                    })
+                    $('#product-category').html(html)
+                } else {
+                    // console.log(resp);
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    function reset_category() {
+        $('#selected-category').text("")
+        $('#selected-cat-name').val("")
+        $.ajax({
+            url: "<?= base_url('/api/categories') ?>",
+            type: "GET",
+            beforeSend: function () { },
+            success: function (resp) {
+                let html = '<option disabled selected value="">Select-category</option>'
+                if (resp.status) {
+                    $.each(resp.data, function (key, val) {
+                        html += `<option value="${val.uid}">${val.name}</option>`
+                    })
+                }
+                $('#product-category').html(html)
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    }
+
 
     function load_products() {
         let user_type = '<?= !empty($_SESSION[SES_ADMIN_TYPE]) ? $_SESSION[SES_ADMIN_TYPE] : $_SESSION[SES_STAFF_TYPE] ?>'
@@ -149,6 +236,9 @@
                         }), function(index, product) {
                             let product_img = product.product_img.length > 0 ? '<?= base_url('public/uploads/product_images/') ?>'+product.product_img[0]['src'] : '<?= base_url('public/assets/images/product_demo.png') ?>'
                             html += `<tr onclick="redirect_single_product('${product.product_id}')">
+                                            <td onclick="event.stopPropagation()">
+                                                <input type="checkbox" id="product_id_for_category" name="product_id_for_category" onclick="event.stopPropagation()" value="${product.product_id}">
+                                            </td>
                                             <td>
                                                 <p>${product.name.slice(0, 15) + (product.name.length > 15 ? '...' : '')}</p>
                                                 <img src="${product_img}" alt="" class="product-img">
@@ -186,10 +276,10 @@
                         // });
 
                         $('#table-product-list-all').DataTable({
-                        order: [[2, 'desc']], // Sort the third column by default in ascending order
+                        order: [[3, 'desc']], // Sort the third column by default in ascending order
                         columnDefs: [
                             {
-                                targets: 2, // Column index (0-based, so 2 is the third column)
+                                targets: 3, // Column index (0-based, so 2 is the third column)
                                 type: 'date', // Define the column as containing dates
                                 render: function(data, type, row) {
                                     // Ensure the date format is JavaScript friendly (e.g., convert '13 January 2025' to '2025-01-13')
@@ -272,8 +362,8 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                    // $('#product_add_btn').html(`<div class="spinner-border" role="status"></div>`)
-                    // $('#product_add_btn').attr('disabled', true)
+                    $('#excel_upload_btn').html(`<div class="spinner-border" role="status"></div>`)
+                    $('#excel_upload_btn').attr('disabled', true)
 
                 },
                 success: function (resp) {
@@ -285,12 +375,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>`
                             load_products()
-                        // $('#product-discount-input').val(``)
-                        // $imageContainer.html(``);
-                        // $numOfFiles.html(``);
-                        // clearImages($("#images"), $("#num-of-files"));
-                        // clearImages($("#images2"), $("#num-of-files2"));
-                        // get_size_list()
+                        $('#excel_file').val(``)
                         
                     } else {
                         html += `<div class="alert alert-warning alert-dismissible alert-label-icon label-arrow fade show material-shadow" role="alert">
@@ -307,11 +392,76 @@
                     console.log(err)
                 },
                 complete: function () {
-                    // $('#product_add_btn').html(`submit`)
-                    // $('#product_add_btn').attr('disabled', false)
+                    $('#excel_upload_btn').html(`Upload`)
+                    $('#excel_upload_btn').attr('disabled', false)
                 }
             })
     }
+
+    function update_category(){
+        let category_id = $('#selected-cat-name').val()
+        const checkboxes = document.querySelectorAll('input[name="product_id_for_category"]:checked');
+        let values = [];
+        
+        checkboxes.forEach((checkbox) => {
+            values.push(checkbox.value);
+        });
+        console.log(values)
+        console.log(category_id)
+
+        let formData = new FormData();
+
+        formData.append(`category_id`, category_id);
+        // formData.append(`product_id`,values);
+        formData.append('product_id', JSON.stringify(values));
+
+        $.ajax({
+                url: "<?= base_url('/api/update/product/category') ?>",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    $('#update_product_category').html(`<div class="spinner-border" role="status"></div>`)
+                    $('#update_product_category').attr('disabled', true)
+
+                },
+                success: function (resp) {
+                    let html = ''
+
+                    if (resp.status) {
+                        html += `<div class="alert alert-success alert-dismissible alert-label-icon label-arrow fade show material-shadow" role="alert">
+                                <i class="ri-checkbox-circle-fill label-icon"></i>${resp.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>`
+                            load_products()
+                            reset_category()
+                        
+                    } else {
+                        html += `<div class="alert alert-warning alert-dismissible alert-label-icon label-arrow fade show material-shadow" role="alert">
+                                <i class="ri-alert-line label-icon"></i><strong>Warning</strong> - ${resp.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>`
+                    }
+
+
+                    $('#alert').html(html)
+                    console.log(resp)
+                },
+                error: function (err) {
+                    console.log(err)
+                },
+                complete: function () {
+                    $('#update_product_category').html(`+Add`)
+                    $('#update_product_category').attr('disabled', false)
+                }
+            })
+
+
+        
+    }
+
+
 
 
 

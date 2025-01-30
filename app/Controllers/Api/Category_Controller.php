@@ -59,11 +59,17 @@ class Category_Controller extends Api_Controller
     private function addCategory($parent_id, $category_name)
     {   
         $uploadedFiles = $this->request->getFiles();
-
+        $parent_name = null;
+        if(!empty($parent_id)) {
+            $categoriesModel = new CategoriesModel();
+            $parent_name = $categoriesModel->where('uid', $parent_id)->first();
+        }
+        // $this->prd($parent_name);
         $data = [
             'uid' => $this->generate_uid(UID_CATEGORY),
             'name' => $category_name,
             'parent_id' => !empty($parent_id) ? $parent_id : '',
+            'parent_name' => !empty($parent_id) ? $parent_name['name'] : null,
             'img_path' => $this->single_upload($uploadedFiles['images'][0], PATH_CATEGORY_IMG),
             'banner_img_path' => $this->single_upload($uploadedFiles['banner_images'][0], PATH_CATEGORY_BANNER_IMG)
         ];

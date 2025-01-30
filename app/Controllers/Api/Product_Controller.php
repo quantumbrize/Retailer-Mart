@@ -330,45 +330,64 @@ class Product_Controller extends Api_Controller
         $ProductModel = new ProductModel();
         $ProductItemModel = new ProductItemModel();
         $ProductMetaDetalisModel = new ProductMetaDetalisModel();
-
+        $ProductSizeListModel = new ProductSizeListModel();
+        $ItemStocksModel = new ItemStocksModel();
+        
         foreach ($rows as $index => $row) {
             if ($index === 0) {
                 // Skip the header row
                 continue;
             }
 
+            $stocks_list = $ProductSizeListModel->where('uid', $row[14])->first();
+            $listOfSizes = json_decode($stocks_list['size_list'], true);
+
             // Customize columns based on your table structure
             $product_data = [
                 'uid' => $this->generate_uid(UID_PRODUCT),
                 'vendor_id' => $vendor_id,
-                'category_id' => "",
-                'name' => $row[1],
-                'description' => $row[7],
-                'size_id' => "",
+                'category_id' => $row[15] ? $row[15] : "",
+                'batch_id' => $row[0],
+                'name' => $row[2],
+                'description' => $row[8],
+                'size_id' => $row[14],
                 'status' => "active",
             ];
 
             $product_item_data = [
                 'uid' => $this->generate_uid(UID_PRODUCT_ITEM),
                 'product_id' => $product_data['uid'],
-                'price' => $row[5],
-                'mrp' => $row[4],
+                'price' => $row[6],
+                'mrp' => $row[5],
                 'discount' => 0,
                 // 'product_tags' => "",
                 'publish_date' => date('Y-m-d H:i:s'),
-                'generic_name' => $row[2],
-                'company_name' => $row[3],
-                'exp_date' => $row[6],
-                'container_type' => $row[9],
-                'flavour' => $row[10] ? $row[10] : "",
-                'purchase_quantity' => $row[11] ? $row[11] : 0,
-                'free_quantity' => $row[12] ? $row[12] : 0,
-                'quantity' => $row[8],
+                'generic_name' => $row[3],
+                'company_name' => $row[4],
+                'exp_date' => $row[7],
+                'container_type' => $row[10],
+                'flavour' => $row[11] ? $row[11] : "",
+                'purchase_quantity' => $row[12] ? $row[12] : 0,
+                'free_quantity' => $row[13] ? $row[13] : 0,
+                'quantity' => $row[9],
                 'status' => 'active',
                 'visibility' => 'visible',
                 'manufacturer_brand' => "",
                 'manufacturer_name' => ""
             ];
+
+            $item_stock_data = [];
+            foreach($listOfSizes as $i => $size_list_data){
+                $item_stock_data[] = [
+                    'uid' => $this->generate_uid('ITSKU'),
+                    'product_id' => $product_data['uid'],
+                    'varient_id' =>'',
+                    'size_id' => $row[14],
+                    'sizes' => $size_list_data,
+                    'stocks' => 0,
+                ];
+            }
+
 
             $product_meta_data = [
                 'uid' => $this->generate_uid(UID_PRODUCT_META),
@@ -385,6 +404,7 @@ class Product_Controller extends Api_Controller
             try {
                 $ProductModel->insert($product_data);
                 $insertData = $ProductItemModel->insert($product_item_data);
+                $ItemStocksModel->insertBatch($item_stock_data);
                 // $this->prd($insertData);
                 $ProductMetaDetalisModel->insert($product_meta_data);
                 // Commit the transaction if all queries are successful
@@ -400,6 +420,36 @@ class Product_Controller extends Api_Controller
         $resp['status'] = true;
         $resp['message'] = 'Products added successfully';
         return $resp;
+    }
+
+    private function product_category_update($data)
+    {
+        $resp = [
+            'status' => false,
+            'message' => 'Product Catedory Not Updated',
+            'data' => null
+        ];
+
+
+        try {
+            $product_id = json_decode($data['product_id'], true);
+            // $this->prd($product_id);
+            $ProductModel = new ProductModel();
+            foreach($product_id as $index => $p_id){
+                $ProductModel->set(['category_id' => $data['category_id']])
+                    ->where('uid', $p_id)
+                    ->update();
+            }
+            $resp = [
+                'status' => true,
+                'message' => 'Product Category Updated',
+                'data' => []
+            ];
+        } catch (\Exception $e) {
+            $resp['message'] = $e;
+        }
+        return $resp;
+
     }
 
     private function product_bulk_update($data)
@@ -739,13 +789,13 @@ class Product_Controller extends Api_Controller
                 product.uid AS product_id,
                 product.name AS name,
                 product.description AS description,
+                product.video_url,
                 product.status AS product_status,
                 product.created_at AS created_at,
                 categories.name AS category,
                 categories.uid AS category_id,
                 product_item.uid AS product_item_id,
                 product_item.price AS base_price,
-                product_item.mrp,
                 product_item.sku AS product_stock,
                 product_item.discount AS base_discount,
                 -- product_item.product_tags AS tags,
@@ -805,9 +855,16 @@ class Product_Controller extends Api_Controller
                 $whereConditions[] = "vendor.user_id = '{$data['v_id']}'";
             }
 
+            // Alphabetical condition
+            if (!empty($data['alph'])) {
+                $whereConditions[] = "product.name LIKE '{$data['alph']}%'";
+            }
+
             if (!empty($whereConditions)) {
                 $sql .= " WHERE " . implode(" AND ", $whereConditions);
             }
+
+            
 
             $sql .= " GROUP BY product.uid";
             $sql .= " ORDER BY MAX(product.created_at) DESC";
@@ -820,6 +877,7 @@ class Product_Controller extends Api_Controller
                 product.uid AS product_id,
                 product.name AS name,
                 product.description AS description,
+                product.video_url,
                 product.status AS product_status,
                 product.created_at AS created_at,
                 categories.name AS category,
@@ -828,12 +886,12 @@ class Product_Controller extends Api_Controller
                 product_item.price AS base_price,
                 product_item.sku AS product_stock,
                 product_item.discount AS base_discount,
-                product_item.product_tags AS tags,
+                -- product_item.product_tags AS tags,
                 product_item.publish_date AS publish_date,
                 product_item.status AS status,
                 product_item.visibility AS visibility,
                 product_item.quantity,
-                product_item.size_chart,
+                -- product_item.size_chart,
                 product_item.tax,
                 product_item.delivery_charge,
                 product_item.manufacturer_brand AS manufacturer_brand,
@@ -887,6 +945,10 @@ class Product_Controller extends Api_Controller
                 $whereConditions[] = "vendor.user_id = '{$data['v_id']}'";
             }
 
+            if (!empty($data['alph'])) {
+                $whereConditions[] = "product.name LIKE '{$data['alph']}%'";
+            }
+
             if (!empty($whereConditions)) {
                 $sql .= " WHERE " . implode(" AND ", $whereConditions);
             }
@@ -903,7 +965,7 @@ class Product_Controller extends Api_Controller
         // });
 
 
-        
+        // $this->prd($products);
 
         if (count($products) > 0) {
             $ProductImagesModel = new ProductImagesModel();
@@ -2912,6 +2974,13 @@ class Product_Controller extends Api_Controller
     {
         $data = $this->request->getPost();
         $resp = $this->product_bulk_update($data);
+        return $this->response->setJSON($resp);
+    }
+
+    public function POST_product_category_update()
+    {
+        $data = $this->request->getPost();
+        $resp = $this->product_category_update($data);
         return $this->response->setJSON($resp);
     }
 

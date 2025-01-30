@@ -116,11 +116,33 @@
                         <div class="card-body">
 
                             <div class="tab-content text-muted">
+                                <div class="row">
+                                    <div class="col-md-4 d-flex align-items-start gap-2">
+                                        <div class="d-flex flex-column">
+                                            <select class="form-control product-category-list" onChange="get_sub_category()" name="product-category" id="product-category"></select>
+                                            <input type="hidden" id="selected-cat-name">
+                                            <p class="mb-0">
+                                                Selected Category:- <b id="selected-category"></b>
+                                                <!-- <i class="fas fa-redo" style="color: red" onclick="reset_category()"></i> -->
+                                            </p>
+                                        </div>
+                                        
+                                        <button class="btn btn-primary" onclick="reset_category()"><i class="fas fa-redo"  ></i></button>
+                                        <!-- <button class="btn btn-primary" onclick="update_category()" id="update_product_category">+Add</button> -->
+                                        <button class="btn btn-primary" id="update_product_category">+Add</button>
+                                    </div>
+
+                                    <!-- <div class="col-md-3 d-flex align-items-center gap-2">
+                                        <select class="form-control" name="" id=""></select>
+                                        <button class="btn btn-primary">+Add</button>
+                                    </div> -->
+                                </div>
                                 <div class="tab-pane active" id="productnav-all" role="tabpanel">
 
                                     <table id="table-product-list-all" class="table nowrap align-middle table-hover" style="width:100%">
                                         <thead>
                                             <tr>
+                                                <th></th>
                                                 <th>Product</th>
                                                 <th>Category</th>
                                                 <th>Publish date</th>
@@ -183,7 +205,7 @@
         <input type="file" name="excel_file" id="excel_file" class="form-control">
       </div>
       <div class="modal-footer">
-        <button type="button" onclick="upload_excel_file()" class="btn btn-primary">Upload</button>
+        <button type="button" id="excel_upload_btn" onclick="upload_excel_file()" class="btn btn-primary">Upload</button>
       </div>
     </div>
   </div>
