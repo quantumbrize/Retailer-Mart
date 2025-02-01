@@ -32,6 +32,18 @@
                                     placeholder="Enter product title" required="">
                                 <div class="invalid-feedback">Please Enter a product title.</div>
                             </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="product-title-input">Batch Id</label>
+                                <input type="text" class="form-control" id="product-batch-id" value=""
+                                    placeholder="Enter batch id" required="">
+                                <div class="invalid-feedback">Please Enter a batch id.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="product-title-input">Generic Name</label>
+                                <input type="text" class="form-control" id="product-generic-name" value=""
+                                    placeholder="Enter generic name" required="">
+                                <div class="invalid-feedback">Please Enter a generic name.</div>
+                            </div>
                             <div>
                                 <label>Product Description</label>
 
@@ -39,8 +51,10 @@
 
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
+
                     <div class="card">
                         <div class="card-body">
                             <label class="form-label" for="product-image-input">Product Image</label>
@@ -55,6 +69,46 @@
 
                     <div class="card">
                         <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label" for="product-title-input">Company Name</label>
+                                <input type="text" class="form-control" id="product-company-name" value=""
+                                    placeholder="Enter company name" required="">
+                                <div class="invalid-feedback">Please Enter company name.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="product-expire-date-input">Expire Date</label>
+                                <input type="date" class="form-control" id="product-expire-date" value=""
+                                    placeholder="Enter expire date" required="">
+                                <div class="invalid-feedback">Please Enter expire date.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-mb-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="product-title-input">Container Type (Optional)</label>
+                                        <input type="text" class="form-control" id="product-container_type-name" value=""
+                                            placeholder="Enter pcontainer type" required="">
+                                        <div class="invalid-feedback">Please Enter container type.</div>
+                                    </div>
+                                </div>
+                                <div class="col-mb-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="product-title-input">Flavour (Optional)</label>
+                                        <input type="text" class="form-control" id="product-flavour-name" value=""
+                                            placeholder="Enter flavour" required="">
+                                        <div class="invalid-feedback">Please Enter flavour.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="card">
+                        <div class="card-body">
                             <label class="form-label" for="product-image-input">Size Chart</label>
                             <input type="file" id="file-input2"  multiple>
                             <label for="file-input2" id="btn_upload" class="btn btn-success">
@@ -63,7 +117,7 @@
                             <p id="num-of-files2"></p>
                             <div id="images2"></div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="card">
                         <div class="card-header">
@@ -74,63 +128,63 @@
                                         General Info
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" data-bs-toggle="tab" href="#addproduct-metadata" role="tab">
                                         Meta Data
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                         <!-- end card header -->
                         <div class="card-body">
                             <div class="tab-content">
                                 <div class="tab-pane active" id="addproduct-general-info" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-lg-6 ">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="product-price-input">MRP</label>
+                                            <div class="input-group has-validation mb-3">
+                                                <span class="input-group-text" id="product-mrp-addon">₹</span>
+                                                <input type="number" class="form-control" id="product-mrp-input"
+                                                    placeholder="Enter MRP" aria-label="Price"
+                                                    aria-describedby="product-price-addon" required="">
+                                                <div class="invalid-feedback">Please Enter a MRP.</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="product-discount-input">Rate</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="product-rate-addon">₹</span>
+                                                <input type="number" class="form-control" id="product-rate-input"
+                                                    placeholder="Enter discount" aria-label="rate"
+                                                    aria-describedby="product-rate-addon">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end col -->
+                                    </div>
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="mb-3">
-                                                <label class="form-label" for="manufacturer-name-input">Barcode</label>
-                                                <input type="text" class="form-control" id="manufacturer-name-input"
-                                                    placeholder="Enter manufacturer name">
+                                                <label class="form-label" for="manufacturer-name-input">Purchase Quantity</label>
+                                                <input type="number" class="form-control" id="purchase-quantity-input"
+                                                    placeholder="Enter purchase quantity">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="mb-3">
-                                                <label class="form-label" for="manufacturer-brand-input">Store Name</label>
-                                                <input type="text" class="form-control" id="manufacturer-brand-input"
-                                                    placeholder="Enter manufacturer brand">
+                                                <label class="form-label" for="manufacturer-brand-input">Free Quantity</label>
+                                                <input type="number" class="form-control" id="free-quantity-input"
+                                                    placeholder="Enter free quantity">
                                             </div>
                                         </div>
                                     </div>
                                     <!-- end row -->
 
-                                    <div class="row">
-
-                                        <div class="col-lg-6 ">
-                                            <div class="mb-3">
-                                                <label class="form-label" for="product-price-input">Price</label>
-                                                <div class="input-group has-validation mb-3">
-                                                    <span class="input-group-text" id="product-price-addon">₹</span>
-                                                    <input type="text" class="form-control" id="product-price-input"
-                                                        placeholder="Enter price" aria-label="Price"
-                                                        aria-describedby="product-price-addon" required="">
-                                                    <div class="invalid-feedback">Please Enter a product price.</div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="mb-3">
-                                                <label class="form-label" for="product-discount-input">Discount</label>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="product-discount-addon">%</span>
-                                                    <input type="text" class="form-control" id="product-discount-input"
-                                                        placeholder="Enter discount" aria-label="discount"
-                                                        aria-describedby="product-discount-addon">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end col -->
-                                    </div>
+                                    
                                     <!-- end row -->
                                 </div>
                                 <!-- end tab-pane -->
@@ -176,7 +230,7 @@
                 <!-- end col -->
 
                 <div class="col-lg-4">
-                    <div class="card">
+                    <!-- <div class="card">
                         <div class="card-header">
                             <h5 class="card-title mb-0">Publish</h5>
                         </div>
@@ -201,15 +255,13 @@
                                 </select>
                             </div>
                         </div>
-                        <!-- end card body -->
-                    </div>
+                    </div> -->
                     <!-- end card -->
 
-                    <div class="card">
+                    <!-- <div class="card">
                         <div class="card-header">
                             <h5 class="card-title mb-0">Publish Schedule</h5>
                         </div>
-                        <!-- end card body -->
                         <div class="card-body">
                             <div>
                                 <label for="datepicker-publish-input" class="form-label">Publish Date & Time</label>
@@ -218,8 +270,7 @@
                                     data-enable-time="">
                             </div>
                         </div>
-                    </div>
-                    <!-- end card -->
+                    </div> -->
 
                     <div class="card">
                         <div class="card-header">
@@ -253,21 +304,26 @@
                     <!-- end card -->
 
                     <div class="card" id="mainCategories">
-                        <!-- <div class="card-header">
+                        <div class="card-header">
                             <h5 class="card-title mb-0">Product Categories</h5>
                         </div>
                         <div class="card-body">
-                            <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add
-                                    New</a>Select product category</p>
-                            <select class="form-select" id="choices-category-input" name="choices-category-input" onchange="get_sub_category()"
+                            <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline"></a>Select product category</p>
+                            <select class="form-select product-category-list" onchange="get_sub_category()" id="choices-category-input" name="choices-category-input"
                                 data-choices="" data-choices-search-false="">
 
                             </select>
-                        </div> -->
+                            <input type="hidden" id="selected-cat-name">
+                            <p class="mb-0">
+                                Selected Category:- <b id="selected-category"></b>
+                                <!-- <i class="fas fa-redo" style="color: red" onclick="reset_category()"></i> -->
+                            </p>
+                           <i class="fas fa-redo" onclick="reset_category()" ></i>
+                        </div>
                         <!-- end card body -->
                     </div>
 
-                    <div class="card">
+                    <!-- <div class="card">
                         <div class="card-header">
                             <h5 class="card-title mb-0">Keywords</h5>
                         </div>
@@ -279,8 +335,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- end card body -->
-                    </div>
+                    </div> -->
                     <!-- end card -->
 
 

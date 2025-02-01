@@ -108,29 +108,37 @@
             var formData = new FormData();
 
             formData.append('title', $('#product-title-input').val());
+            formData.append('batch_id', $('#product-batch-id').val());
+            formData.append('generic_name', $('#product-generic-name').val());
+            formData.append('company_name', $('#product-company-name').val());
+            formData.append('expire_date', $('#product-expire-date').val());
+            formData.append('container_type', $('#product-container_type-name').val());
+            formData.append('flavour', $('#product-flavour-name').val());
             formData.append('details', editor.getData());
             formData.append('user_id', '<?= !empty($_SESSION[SES_ADMIN_USER_ID]) ? $_SESSION[SES_ADMIN_USER_ID] : $_SESSION[SES_STAFF_USER_ID] ?>');
-            formData.append('categoryId', category_id);
-            formData.append('productTags', $('#product-tags-input').val());
-            formData.append('status', $('#choices-publish-status-input').val());
-            formData.append('visibility', $('#choices-publish-visibility-input').val());
-            formData.append('publishDate', $('#datepicker-publish-input').val());
-            formData.append('manufacturerName', $('#manufacturer-name-input').val());
-            formData.append('manufacturerBrand', $('#manufacturer-brand-input').val());
-            formData.append('price', $('#product-price-input').val());
-            formData.append('discount', $('#product-discount-input').val());
-            formData.append('metaTitle', $('#meta-title-input').val());
-            formData.append('metaKeywords', $('#meta-keywords-input').val());
-            formData.append('metaDescription', $('#meta-description-input').val());
+            formData.append('categoryId', $('#selected-cat-name').val());
+            // formData.append('productTags', $('#product-tags-input').val());
+            // formData.append('status', $('#choices-publish-status-input').val());
+            // formData.append('visibility', $('#choices-publish-visibility-input').val());
+            // formData.append('publishDate', $('#datepicker-publish-input').val());
+            // formData.append('manufacturerName', $('#manufacturer-name-input').val());
+            // formData.append('manufacturerBrand', $('#manufacturer-brand-input').val());
+            formData.append('mrp', $('#product-mrp-input').val());
+            formData.append('rate', $('#product-rate-input').val());
+            formData.append('purchase_quantity', $('#purchase-quantity-input').val());
+            formData.append('free_quantity', $('#free-quantity-input').val());
+            // formData.append('metaTitle', $('#meta-title-input').val());
+            // formData.append('metaKeywords', $('#meta-keywords-input').val());
+            // formData.append('metaDescription', $('#meta-description-input').val());
             formData.append('productSizeId', $('#product-size-list-input').val());
 
             $.each($('#file-input')[0].files, function (index, file) {
                 formData.append('images[]', file);
             });
 
-            $.each($('#file-input2')[0].files, function (index, file) {
-                formData.append('images2[]', file);
-            });
+            // $.each($('#file-input2')[0].files, function (index, file) {
+            //     formData.append('images2[]', file);
+            // });
 
 
             $.ajax({
@@ -193,39 +201,62 @@
             })
         })
 
+        // function get_categories_all() {
+        //     $.ajax({
+        //         url: "<?= base_url('/api/categories') ?>",
+        //         type: "GET",
+        //         beforeSend: function () { },
+        //         success: function (resp) {
+        //             select_main_category_field = `<div class="card-header">
+        //                                             <h5 class="card-title mb-0">Product Categories</h5>
+        //                                         </div>
+        //                                         <div class="card-body">
+        //                                             <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add
+        //                                                     New</a>Select product category</p>
+        //                                             <select class="form-select" id="choices-category-input-${category_id}" name="choices-category-input" onchange="get_sub_category()"
+        //                                                 data-choices="" data-choices-search-false="">
+
+        //                                             </select>
+        //                                         </div>
+        //                                         <!-- end card body -->`
+        //             $('#mainCategories').html(select_main_category_field)
+        //             let html = '<option disabled selected value="">Select-category</option>'
+        //             if (resp.status) {
+        //                 $.each(resp.data, function (key, val) {
+        //                     html += `<option value="${val.uid}">${val.name}</option>`
+        //                 })
+        //             }
+        //             $('#choices-category-input-'+category_id).html(html)
+        //         },
+        //         error: function (err) {
+        //             console.log(err)
+        //         }
+        //     })
+
+        // }
+
         function get_categories_all() {
             $.ajax({
                 url: "<?= base_url('/api/categories') ?>",
                 type: "GET",
                 beforeSend: function () { },
                 success: function (resp) {
-                    select_main_category_field = `<div class="card-header">
-                                                    <h5 class="card-title mb-0">Product Categories</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add
-                                                            New</a>Select product category</p>
-                                                    <select class="form-select" id="choices-category-input-${category_id}" name="choices-category-input" onchange="get_sub_category()"
-                                                        data-choices="" data-choices-search-false="">
-
-                                                    </select>
-                                                </div>
-                                                <!-- end card body -->`
-                    $('#mainCategories').html(select_main_category_field)
+                    console.log('category', resp)
                     let html = '<option disabled selected value="">Select-category</option>'
                     if (resp.status) {
                         $.each(resp.data, function (key, val) {
                             html += `<option value="${val.uid}">${val.name}</option>`
                         })
                     }
-                    $('#choices-category-input-'+category_id).html(html)
+                    $('.product-category-list').html(html)
                 },
                 error: function (err) {
                     console.log(err)
                 }
             })
-
         }
+
+       
 
         function get_size_list() {
             $.ajax({
@@ -298,47 +329,111 @@
     //     });
     // }
 
-    function get_sub_category(parent_id) {
-        var selectElement = document.getElementById("choices-category-input-"+category_id);
-        var prev_select_id = "choices-category-input-"+category_id
-        var parent_id = selectElement.value;
-        category_id = parent_id
-        // alert(category_id)
-        console.log(parent_id)
-        $.ajax({
-            url: "<?= base_url('/api/categories') ?>",
-            type: "GET",
-            data: { parent_id: parent_id }, // Add a comma after this line
-            beforeSend: function () { },
-            success: function (resp) {
-                if (resp.status) {
-                    // console.log(resp);
-                    document.getElementById(prev_select_id).disabled = true;
-                    select_field = `<div class="card-header">
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add
-                                                New</a>Select product sub-category</p>
-                                        <select class="form-select" id="choices-category-input-${category_id}" name="choices-category-input" onchange="get_sub_category()"
-                                            data-choices="" data-choices-search-false="">
+    // function get_sub_category(parent_id) {
+    //     var selectElement = document.getElementById("choices-category-input-"+category_id);
+    //     var prev_select_id = "choices-category-input-"+category_id
+    //     var parent_id = selectElement.value;
+    //     category_id = parent_id
+    //     // alert(category_id)
+    //     console.log(parent_id)
+    //     $.ajax({
+    //         url: "<?= base_url('/api/categories') ?>",
+    //         type: "GET",
+    //         data: { parent_id: parent_id }, // Add a comma after this line
+    //         beforeSend: function () { },
+    //         success: function (resp) {
+    //             if (resp.status) {
+    //                 // console.log(resp);
+    //                 document.getElementById(prev_select_id).disabled = true;
+    //                 select_field = `<div class="card-header">
+    //                                 </div>
+    //                                 <div class="card-body">
+    //                                     <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add
+    //                                             New</a>Select product sub-category</p>
+    //                                     <select class="form-select" id="choices-category-input-${category_id}" name="choices-category-input" onchange="get_sub_category()"
+    //                                         data-choices="" data-choices-search-false="">
 
-                                        </select>
-                                    </div>
-                                    <!-- end card body -->`
-                    $('#mainCategories').append(select_field)
-                    let html = '<option disabled selected value="">Select-category</option>'
-                    $.each(resp.data, function (key, val) {
+    //                                     </select>
+    //                                 </div>
+    //                                 <!-- end card body -->`
+    //                 $('#mainCategories').append(select_field)
+    //                 let html = '<option disabled selected value="">Select-category</option>'
+    //                 $.each(resp.data, function (key, val) {
+    //                         html += `<option value="${val.uid}">${val.name}</option>`
+    //                     })
+    //                 $('#choices-category-input-'+category_id).html(html)
+    //             }else{
+    //                 console.log(resp);
+    //             }
+    //         },
+    //         error: function (err) {
+    //             console.log(err);
+    //         }
+    //     });
+    // }
+
+    function get_sub_category() {
+            let cat_id = $('#choices-category-input').val()
+            $('#selected-cat-name').val(cat_id)
+            $.ajax({
+                url: "<?= base_url('/api/category/by/id') ?>",
+                type: "GET",
+                data: { c_id: cat_id },
+                beforeSend: function () { },
+                success: function (resp) {
+                    if (resp.status) {
+                        // console.log(resp)
+                        $('#selected-category').text(resp.data.name)
+                    } else {
+                        // console.log(resp);
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+            $.ajax({
+                url: "<?= base_url('/api/categories') ?>",
+                type: "GET",
+                data: { parent_id: cat_id },
+                beforeSend: function () { },
+                success: function (resp) {
+                    if (resp.status) {
+                        let html = '<option disabled selected value="">Select Sub-category</option>'
+                        $.each(resp.data, function (key, val) {
                             html += `<option value="${val.uid}">${val.name}</option>`
                         })
-                    $('#choices-category-input-'+category_id).html(html)
-                }else{
-                    console.log(resp);
+                        $('#choices-category-input').html(html)
+                    } else {
+                        // console.log(resp);
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
                 }
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
-    }
+            });
+        }
+
+        function reset_category() {
+            $('#selected-category').text("")
+            $('#selected-cat-name').val("")
+            $.ajax({
+                url: "<?= base_url('/api/categories') ?>",
+                type: "GET",
+                beforeSend: function () { },
+                success: function (resp) {
+                    let html = '<option disabled selected value="">Select-category</option>'
+                    if (resp.status) {
+                        $.each(resp.data, function (key, val) {
+                            html += `<option value="${val.uid}">${val.name}</option>`
+                        })
+                    }
+                    $('#choices-category-input').html(html)
+                },
+                error: function (err) {
+                    console.log(err)
+                }
+            })
+        }
 
 </script>

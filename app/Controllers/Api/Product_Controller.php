@@ -53,18 +53,26 @@ class Product_Controller extends Api_Controller
 
         if (empty($data['title'])) {
             $resp['message'] = 'Your Product Has No Name';
+        } else if (empty($data['batch_id'])) {
+            $resp['message'] = 'Please add Batch Id';
+        } else if (empty($data['generic_name'])) {
+            $resp['message'] = 'Please add Generic Name';
+        } else if (empty($data['company_name'])) {
+            $resp['message'] = 'Please add Company Name';
+        } else if (empty($data['expire_date'])) {
+            $resp['message'] = 'Please add Expire Date';
         } else if (empty($data['details'])) {
             $resp['message'] = 'Please add Some Details About Your Product';
-        } else if (empty($data['price'])) {
-            $resp['message'] = 'Set The Price Of Your Product';
+        } else if (empty($data['mrp'])) {
+            $resp['message'] = 'Set The MRP Of Your Product';
+        } else if (empty($data['rate'])) {
+            $resp['message'] = 'Set The Rate Of Your Product';
         } else if (empty($data['categoryId'])) {
             $resp['message'] = 'Set The Category Of Your Product';
         } else if (empty($vendor_id)) {
             $resp['message'] = 'Vendor Not Found';
         } else if (empty($uploadedFiles['images'])) {
             $resp['message'] = 'Please Add One Product Image';
-        } else if (empty($uploadedFiles['images2'])) {
-            $resp['message'] = 'Please Add Product Size Chart';
         } else if (empty($data['productSizeId'])) {
             $resp['message'] = 'Please Add Size';
         } else {
@@ -74,14 +82,27 @@ class Product_Controller extends Api_Controller
             $listOfSizes = json_decode($stocks_list['size_list'], true);
             $item_stock_data = [];
 
+            // $product_data = [
+            //     'uid' => $this->generate_uid(UID_PRODUCT),
+            //     'vendor_id' => $vendor_id,
+            //     'category_id' => $data['categoryId'],
+            //     'name' => $data['title'],
+            //     'description' => $data['details'],
+            //     'size_id' => $data['productSizeId'],
+            // ];
             $product_data = [
                 'uid' => $this->generate_uid(UID_PRODUCT),
                 'vendor_id' => $vendor_id,
                 'category_id' => $data['categoryId'],
+                'batch_id' => $data['batch_id'],
                 'name' => $data['title'],
                 'description' => $data['details'],
                 'size_id' => $data['productSizeId'],
+                'status' => "active",
             ];
+
+
+
             foreach($listOfSizes as $index => $size_list_data){
                 $item_stock_data[] = [
                     'uid' => $this->generate_uid('ITSKU'),
@@ -92,24 +113,51 @@ class Product_Controller extends Api_Controller
                     'stocks' => 0,
                 ];
             }
+            // $product_item_data = [
+            //     'uid' => $this->generate_uid(UID_PRODUCT_ITEM),
+            //     'product_id' => $product_data['uid'],
+            //     'price' => $data['price'],
+            //     'discount' => $data['discount'],
+            //     'product_tags' => $data['productTags'],
+            //     'publish_date' => $data['publishDate'],
+            //     'status' => $data['status'],
+            //     'visibility' => $data['visibility'],
+            //     'manufacturer_brand' => $data['manufacturerBrand'],
+            //     'manufacturer_name' => $data['manufacturerName']
+            // ];
             $product_item_data = [
                 'uid' => $this->generate_uid(UID_PRODUCT_ITEM),
                 'product_id' => $product_data['uid'],
-                'price' => $data['price'],
-                'discount' => $data['discount'],
-                'product_tags' => $data['productTags'],
-                'publish_date' => $data['publishDate'],
-                'status' => $data['status'],
-                'visibility' => $data['visibility'],
-                'manufacturer_brand' => $data['manufacturerBrand'],
-                'manufacturer_name' => $data['manufacturerName']
+                'price' => $data['rate'],
+                'mrp' => $data['mrp'],
+                'discount' => 0,
+                // 'product_tags' => "",
+                'publish_date' => date('Y-m-d H:i:s'),
+                'generic_name' => $data['generic_name'],
+                'company_name' => $data['company_name'],
+                'exp_date' => $data['expire_date'],
+                'container_type' => $data['container_type'] ? $data['container_type'] : "",
+                'flavour' => $data['flavour'] ? $data['flavour'] : "",
+                'purchase_quantity' => $data['purchase_quantity'] ? $data['purchase_quantity'] : 0,
+                'free_quantity' => $data['free_quantity'] ? $data['free_quantity'] : 0,
+                'quantity' => 0,
+                'status' => 'active',
+                'visibility' => 'visible',
+                'manufacturer_brand' => "",
+                'manufacturer_name' => ""
             ];
+
+
+
+
+
+
             $product_meta_data = [
                 'uid' => $this->generate_uid(UID_PRODUCT_META),
                 'product_id' => $product_data['uid'],
-                'meta_title' => $data['metaTitle'],
-                'meta_description' => $data['metaDescription'],
-                'meta_keywords' => $data['metaKeywords'],
+                'meta_title' => "",
+                'meta_description' => "",
+                'meta_keywords' => "",
             ];
 
             $ProductImagesModel = new ProductImagesModel();
@@ -124,10 +172,10 @@ class Product_Controller extends Api_Controller
                 $ProductImagesModel->insert($product_image_data);
             }
 
-            foreach ($uploadedFiles['images2'] as $file) {
-                $file_src = $this->single_upload($file, 'public/uploads/product_size_chart');
-                $product_item_data['size_chart'] = $file_src;
-            }
+            // foreach ($uploadedFiles['images2'] as $file) {
+            //     $file_src = $this->single_upload($file, 'public/uploads/product_size_chart');
+            //     $product_item_data['size_chart'] = $file_src;
+            // }
 
             $ProductModel = new ProductModel();
             $ProductItemModel = new ProductItemModel();
@@ -796,6 +844,7 @@ class Product_Controller extends Api_Controller
                 categories.uid AS category_id,
                 product_item.uid AS product_item_id,
                 product_item.price AS base_price,
+                product_item.mrp,
                 product_item.sku AS product_stock,
                 product_item.discount AS base_discount,
                 -- product_item.product_tags AS tags,
@@ -884,6 +933,7 @@ class Product_Controller extends Api_Controller
                 categories.uid AS category_id,
                 product_item.uid AS product_item_id,
                 product_item.price AS base_price,
+                product_item.mrp,
                 product_item.sku AS product_stock,
                 product_item.discount AS base_discount,
                 -- product_item.product_tags AS tags,
